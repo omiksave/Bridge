@@ -17,7 +17,9 @@ void InsoleWrapper::UpdateInsole()
 {
 	tx->scan();
 	pprivate = tx->matrix();
+	shareblock.lock();
 	memcpy(p, pprivate, 128 * 4);
+	shareblock.unlock();
 }
 
 

@@ -3,11 +3,14 @@
 #include<thread>
 #include<chrono>
 #include"Tactilus.h"
+#include<mutex>
+
 class InsoleWrapper
 {	private:
 		Tactilus* tx = new Tactilus();//Create new insole object from Tactilus API
-		float* pprivate;//Pointer communicating with API
+		float* pprivate = new float[128];//Pointer communicating with API
 		std::thread updater;
+		std::mutex	shareblock;
 	public:
 		InsoleWrapper();
 		unsigned char* p = new unsigned char[128*4];//Pointer communicating with Task Manager
