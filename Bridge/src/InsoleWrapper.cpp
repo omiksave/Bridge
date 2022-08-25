@@ -22,12 +22,24 @@ void InsoleWrapper::UpdateInsole()
 	shareblock.unlock();//Release lock
 }
 
-void InsoleWrapper::StartThread()
+void InsoleWrapper::ThreadFunc()
 {
 	while (runstat) {
 		UpdateInsole();
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));//Pause the loop for sensor to update
 	}
+
+}
+
+void InsoleWrapper::StartThread()
+{
+	runstat = true;//Start thread
+	auto threadrunner = std::thread(&ThreadFunc, this);//Create object specific thread for constant update of insole
+}
+
+void InsoleWrapper::StopThread()
+{
+	runstat = false;
 }
 
 

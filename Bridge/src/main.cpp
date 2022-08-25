@@ -5,9 +5,9 @@
 int main() {
 
 	InsoleWrapper I1;
-	InsoleWrapper I2;
-	I1.UpdateInsole();
-	I2.UpdateInsole();
+	//InsoleWrapper I2;
+	I1.StartThread();
+	//I2.UpdateInsole();
 	std::cin.get();
 
 }
