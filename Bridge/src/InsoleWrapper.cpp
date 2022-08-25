@@ -1,6 +1,11 @@
 #pragma once
 #include "InsoleWrapper.h"
 
+InsoleWrapper::InsoleWrapper()
+{
+
+}
+
 float* InsoleWrapper::SetupInsole()
 {
 	tx->connect(true);

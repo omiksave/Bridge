@@ -9,6 +9,7 @@ class InsoleWrapper
 		float* pprivate;//Pointer communicating with API
 		std::thread updater;
 	public:
+		InsoleWrapper();
 		float* p;//Pointer communicating with Task Manager
 		
 		float* SetupInsole();//Connect to Insole via API
