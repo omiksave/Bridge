@@ -9,16 +9,16 @@ InsoleWrapper::InsoleWrapper()
 void InsoleWrapper::SetupInsole()
 {
 	std::cout << "Connecting Sensor" << std::endl;
-	tx->connect(true);
+	tx->connect(true);//Connect to Insole with true calibration
 	std::cout << "Insole Connected" << std::endl;
 }
 
 void InsoleWrapper::UpdateInsole()
 {
-	tx->scan();
-	pprivate = tx->matrix();
+	tx->scan();//Refresh new frame from Insole API
+	pprivate = tx->matrix();//Update Matrix
 	shareblock.lock();
-	memcpy(p, pprivate, 128 * 4);
+	memcpy(p, pprivate, 128 * 4);//Copy matrix for Task Manager access
 	shareblock.unlock();
 }
 
