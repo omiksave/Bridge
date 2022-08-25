@@ -3,13 +3,14 @@
 
 InsoleWrapper::InsoleWrapper()
 {
-
+	SetupInsole();
 }
 
-float* InsoleWrapper::SetupInsole()
+void InsoleWrapper::SetupInsole()
 {
+	std::cout << "Connecting Sensor" << std::endl;
 	tx->connect(true);
-	return p;
+	std::cout << "Insole Connected" << std::endl;
 }
 
 void InsoleWrapper::UpdateInsole()
@@ -18,4 +19,5 @@ void InsoleWrapper::UpdateInsole()
 	pprivate = tx->matrix();
 	memcpy(p, pprivate, 128 * 4);
 }
+
 

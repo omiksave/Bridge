@@ -10,9 +10,9 @@ class InsoleWrapper
 		std::thread updater;
 	public:
 		InsoleWrapper();
-		float* p;//Pointer communicating with Task Manager
+		unsigned char* p = new unsigned char[128*4];//Pointer communicating with Task Manager
 		
-		float* SetupInsole();//Connect to Insole via API
+		void SetupInsole();//Connect to Insole via API
 		void UpdateInsole();//Update Sensor Matrix
 
 

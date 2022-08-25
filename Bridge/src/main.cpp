@@ -1,10 +1,13 @@
 #include<iostream>
-#include<boost/asio.hpp>
+//#include<boost/asio.hpp>
 #include"InsoleWrapper.h"
 
 int main() {
 
-	InsoleWrapper::tx = new InsoleWrapper();
+	InsoleWrapper I1;
+	I1.UpdateInsole();
+	I1.UpdateInsole();
+	std::cin.get();
 //	printf("Connecting Sensor1\n");
 //	Tactilus* t = new Tactilus();
 //	t->connect(true);
