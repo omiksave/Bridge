@@ -1,15 +1,16 @@
 #pragma once
 #include "InsoleWrapper.h"
 
-void InsoleWrapper::SetupInsole()
+float* InsoleWrapper::SetupInsole()
 {
 	tx->connect(true);
+	return p;
 }
 
-float* InsoleWrapper::UpdateInsole()
+void InsoleWrapper::UpdateInsole()
 {
 	tx->scan();
 	pprivate = tx->matrix();
 	memcpy(p, pprivate, 128 * 4);
-	return p;
 }
+
