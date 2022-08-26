@@ -9,5 +9,6 @@ int main() {
 	I1.StartThread();
 	//I2.UpdateInsole();
 	std::cin.get();
+	I1.StopThread();
 
 }
