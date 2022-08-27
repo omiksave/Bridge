@@ -8,9 +8,10 @@ using ip::tcp;
 
 int main() {
 
-	InsoleWrapper* I1 = new InsoleWrapper();
+	InsoleWrapper I1;
 	//InsoleWrapper I2;
-	I1->StartThread();
+	//I1.StartThread();
+	// 
 	//I2.UpdateInsole();
 	boost::asio::io_service io_service;
 	//socket creation
@@ -24,12 +25,14 @@ int main() {
 	std::atomic<bool> runner = true;
 
 	//std::thread tthr(sendPacket, pointrunner, I1, error, socket);
-	std::cin.get();
+	//std::cin.get();
 	runner = false;
-	//while(1) {
-	//	boost::asio::write(socket, boost::asio::buffer(I1.p, 128 * 4), error);
-	//	std::this_thread::sleep_for(std::chrono::microseconds(100));
-	//}
+	while(1) {
+		I1.UpdateInsole();
+		//boost::asio::write(socket, boost::asio::buffer(I1.p, 128 * 4), error);
+		/*socket.write_some(boost::asio::buffer(I1.p, 128 * 4), error);
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));*/
+	}
 
 	std::cin.get();
 
