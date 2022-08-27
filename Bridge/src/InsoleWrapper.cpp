@@ -3,7 +3,7 @@
 
 InsoleWrapper::InsoleWrapper()
 {
-	SetupInsole();
+	SetupInsole();//Initialize object
 }
 
 void InsoleWrapper::SetupInsole()
@@ -16,35 +16,32 @@ void InsoleWrapper::SetupInsole()
 
 void InsoleWrapper::UpdateInsole()
 {
-	tx->scan();//Refresh new frame from Insole API
 	shareblock.lock();//Add lock to avoid memory corruption
+	tx->scan();//Refresh new frame from Insole API
 	memcpy(p, pprivate, 128 * 4);//Copy matrix for Task Manager access
 	shareblock.unlock();//Release lock
 }
 
 void InsoleWrapper::ThreadFunc()
 {
-
 	std::cout << "Thread is running" << std::endl;
 	while (runstat) {
 		UpdateInsole();
-		std::this_thread::sleep_for(std::chrono::milliseconds(1));//Pause the loop for sensor to update
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	}
 	std::cout << "This thread has stopped" << std::endl;
-
 }
 
 void InsoleWrapper::StartThread()
 {
 	runstat = true;//Start thread
-	threadrunner = new std::thread(&InsoleWrapper::ThreadFunc, this);//Create object specific thread for constant update of insole
+	threadrunner = std::thread(&InsoleWrapper::ThreadFunc, this);//Create object specific thread for constant update of insole
 }
 
 void InsoleWrapper::StopThread()
 {
 	runstat = false;
-	threadrunner->join();
-	delete threadrunner;
+	threadrunner.join();
 }
 
 

@@ -11,7 +11,7 @@ class InsoleWrapper
 		Tactilus* tx = new Tactilus();//Create new insole object from Tactilus API
 		float* pprivate = new float[128]();//Pointer communicating with API
 		std::mutex	shareblock;//Create lock for pointer when copying data from API
-		std::thread* threadrunner;//Create pointer for thread
+		std::thread threadrunner;//Create pointer for thread
 	public:
 		unsigned char* p = new unsigned char[128 * 4]();//Pointer communicating with Task Manager
 		std::atomic<bool> runstat {false};//Default dont run thread
