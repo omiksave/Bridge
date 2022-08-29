@@ -14,7 +14,7 @@ private:
 	std::mutex shareblock;//Create lock for pointer when copying data from API
 	std::thread threadrunner;//Create pointer for thread
 public:
-	int ID;
+	int ID;//Insole ID
 	unsigned char* p = new unsigned char[128 * 4]();//Pointer communicating with Task Manager
 	std::atomic<bool> runstat {false};//Default dont run thread
 /************************************************************************/
