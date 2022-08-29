@@ -21,6 +21,8 @@ void TCPCOM_Client::getSensor()
 {
 	I1 = new InsoleWrapper(104);
 	I2 = new InsoleWrapper(105);
+	packet = { boost::asio::buffer(I1->p,128 * 4),
+			   boost::asio::buffer(I1->p,128 * 4) };
 }
 
 void TCPCOM_Client::runSensor()

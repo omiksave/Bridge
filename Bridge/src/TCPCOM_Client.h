@@ -1,7 +1,10 @@
 #pragma once
 #include"InsoleWrapper.h"
 #include<boost/asio.hpp>
+#include<boost/array.hpp>
 #include<string>
+
+typedef boost::array<boost::asio::const_buffer, 2> sensorPacket;//Define Buffer Array
 
 class TCPCOM_Client
 {
@@ -15,14 +18,17 @@ private:
 	/*******************************************Sensor Specific Member Variables*******************************************/
 	InsoleWrapper* I1;//Create new instance for Insole #104
 	InsoleWrapper* I2;//Create new instance for Insole #105
+	sensorPacket packet;//Create variable for storing buffer of all sensors
 	/********************************************Client Multithreading Member Variables******************************************/
 	std::mutex	blockClient;//Create lock for pointer when copying data from API
 	std::thread threadClient;//Create pointer for thread
 public:
+	std::atomic<bool> runstat{ false };//Default dont run thread
 	TCPCOM_Client(std::string add,int portx);//Intialize Class Instance
 	void Connect();//Connect to Socket
 	void getSensor();//Intialize Insoles from Client Instance
 	void runSensor();//Start Individual Threads on Each Sensors to update data
 	void stopSensor();//Stop all threads on all sensors
+
 };
 
