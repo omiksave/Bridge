@@ -25,12 +25,12 @@ void TCPCOM_Client::getSensor()
 
 void TCPCOM_Client::runSensor()
 {
-	I1->StartThread();
-	I2->StartThread();
+	I1->StartThread();//Start Insole 1 thread
+	I2->StartThread();//Start Insole 2 thread
 }
 
 void TCPCOM_Client::stopSensor()
 {
-	I1->runstat = false;
-	I2->runstat = false;
+	I1->StopThread();//Stop Insole 1 thread
+	I2->StopThread();//Stop Insole 2 thread
 }
