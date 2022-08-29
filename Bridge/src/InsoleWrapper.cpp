@@ -25,7 +25,7 @@ void InsoleWrapper::UpdateInsole()
 
 void InsoleWrapper::ThreadFunc()
 {
-	std::cout << "Thread is running" << std::endl;
+	std::cout << "Insole " << ID << " is running" << std::endl;
 	while (runstat) {
 		std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 		UpdateInsole();
@@ -33,7 +33,7 @@ void InsoleWrapper::ThreadFunc()
 		std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 		std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[ms]" << std::endl;
 	}
-	std::cout << "This thread has stopped" << std::endl;
+	std::cout << "Insole "<< ID<<" has stopped" << std::endl;
 }
 
 void InsoleWrapper::StartThread()
