@@ -59,12 +59,15 @@ void TCPCOM_Client::threadClientFunc()
 
 void TCPCOM_Client::startClientThread()
 {
+	runSensor();//Start all sensor threads
+	std::this_thread::sleep_for(std::chrono::seconds(1));
 	runClient = true;//Start thread
 	threadClient = std::thread(&TCPCOM_Client::threadClientFunc, this);//Create object specific thread for sending data to external computer
 }
 
 void TCPCOM_Client::stopClientThread()
 {
+	stopSensor();//Stop all sensor threads
 	runClient = false;//Exit infinite while loop
 	threadClient.join();//Kill thread
 }
