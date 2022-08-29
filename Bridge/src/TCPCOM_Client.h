@@ -34,5 +34,6 @@ public:
 	void threadClientFunc();//Loop send until stopped
 	void startClientThread();//Start seperate thread to control buffer send
 	void stopClientThread();//Stop buffer send thread
+	~TCPCOM_Client(void);//Class destructor
 };
 

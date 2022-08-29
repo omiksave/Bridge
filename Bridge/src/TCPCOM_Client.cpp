@@ -72,3 +72,12 @@ void TCPCOM_Client::stopClientThread()
 	runClient = false;//Exit infinite while loop
 	threadClient.join();//Kill thread
 }
+
+TCPCOM_Client::~TCPCOM_Client(void)
+{
+	delete I1;//Delete Insole 104 instance
+	delete I2;//Delete Insole 105 instance
+	delete sock.release();//Delete Socket
+	delete io_service.release();//Delete IO Service
+	std::cout << "Closing Client!" << std::endl;
+}

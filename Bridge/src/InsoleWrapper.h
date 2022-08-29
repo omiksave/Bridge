@@ -24,5 +24,6 @@ public:
 	void ThreadFunc();//Loop Update until asked to stop
 	void StartThread();//Start Thread
 	void StopThread();//Stop Thread
+	~InsoleWrapper(void);//Class destructor
 };
 

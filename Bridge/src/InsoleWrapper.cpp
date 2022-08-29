@@ -48,4 +48,10 @@ void InsoleWrapper::StopThread()
 	threadrunner.join();//Kill thread
 }
 
+InsoleWrapper::~InsoleWrapper(void)
+{
+	delete tx;//Delete API Instance
+	std::cout << "Closing Insole " << ID << std::endl;
+}
+
 
