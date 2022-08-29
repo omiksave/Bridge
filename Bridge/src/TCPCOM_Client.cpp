@@ -23,7 +23,14 @@ void TCPCOM_Client::getSensor()
 	I2 = new InsoleWrapper(105);
 }
 
-void TCPCOM_Client::getPacket()
+void TCPCOM_Client::runSensor()
 {
+	I1->StartThread();
+	I2->StartThread();
+}
 
+void TCPCOM_Client::stopSensor()
+{
+	I1->runstat = false;
+	I2->runstat = false;
 }

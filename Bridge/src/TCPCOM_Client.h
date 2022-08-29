@@ -22,7 +22,8 @@ public:
 	TCPCOM_Client(std::string add,int portx);//Intialize Class Instance
 	void Connect();//Connect to Socket
 	void getSensor();//Intialize Insoles from Client Instance
-	void getPacket();
+	void runSensor();//Start Individual Threads on Each Sensors to update data
+	void stopSensor();
 	void threadPacket();
 };
 
