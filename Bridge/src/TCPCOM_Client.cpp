@@ -39,9 +39,9 @@ void TCPCOM_Client::stopSensor()
 
 void TCPCOM_Client::sendPacket()
 {
-	blockClient.lock();
+	blockClient.lock();//Lock packet until safe
 	sock->send(packet);//Send Latest Packet
-	blockClient.unlock();
+	blockClient.unlock();//Unlock packet
 }
 
 void TCPCOM_Client::threadClientFunc()
@@ -59,6 +59,7 @@ void TCPCOM_Client::threadClientFunc()
 
 void TCPCOM_Client::startClientThread()
 {
+	getSensor();//Initialize all sensors
 	runSensor();//Start all sensor threads
 	std::this_thread::sleep_for(std::chrono::seconds(1));
 	runClient = true;//Start thread
