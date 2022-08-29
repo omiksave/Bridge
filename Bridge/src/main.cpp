@@ -1,6 +1,6 @@
-#include"InsoleWrapper.h"
-#include"TCPCOM_Client.h"
-#include<timeapi.h>
+#include"InsoleWrapper.h"//Insole Wrapper Function
+#include"TCPCOM_Client.h"//TCP Client Function
+#include<timeapi.h>//Access system granularity
 
 int main() {
 	timeBeginPeriod(1);//Change system granularity to 1 ms, default 10ms
