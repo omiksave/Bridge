@@ -151,6 +151,7 @@
     <ClInclude Include="src\InsoleWrapper.h" />
     <ClInclude Include="src\Tactilus.h" />
     <ClInclude Include="src\TCPCOM_Client.h" />
+    <ClInclude Include="src\threespace_api_export.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\run\Win32\Debug\core.dll" />
@@ -158,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\core.lib" />
+    <Library Include="lib\TSS_API_32.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
