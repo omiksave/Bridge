@@ -15,20 +15,24 @@ private:
 	std::unique_ptr<boost::system::error_code> error;//Create unique pointer for ERROR CODE
 	std::string address;//Store COM Address
 	int port;//Store COM Port
-	/*******************************************Sensor Specific Member Variables*******************************************/
+	/*******************************************Sensor Specific Member Variables************************************************/
 	InsoleWrapper* I1;//Create new instance for Insole #104
 	InsoleWrapper* I2;//Create new instance for Insole #105
 	sensorPacket packet;//Create variable for storing buffer of all sensors
-	/********************************************Client Multithreading Member Variables******************************************/
+	/********************************************Client Multithreading Member Variables*****************************************/
 	std::mutex	blockClient;//Create lock for pointer when copying data from API
 	std::thread threadClient;//Create pointer for thread
 public:
-	std::atomic<bool> runstat{ false };//Default dont run thread
+	std::atomic<bool> runClient{ false };//Default dont run thread
+	/***************************************************************************************************************************/
 	TCPCOM_Client(std::string add,int portx);//Intialize Class Instance
 	void Connect();//Connect to Socket
 	void getSensor();//Intialize Insoles from Client Instance
 	void runSensor();//Start Individual Threads on Each Sensors to update data
 	void stopSensor();//Stop all threads on all sensors
-
+	void sendPacket();//Send Packet Function
+	void threadClientFunc();//Loop send until stopped
+	void startClientThread();//Start seperate thread to control buffer send
+	void stopClientThread();//Stop buffer send thread
 };
 

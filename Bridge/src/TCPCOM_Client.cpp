@@ -36,3 +36,35 @@ void TCPCOM_Client::stopSensor()
 	I1->StopThread();//Stop Insole 1 thread
 	I2->StopThread();//Stop Insole 2 thread
 }
+
+void TCPCOM_Client::sendPacket()
+{
+	blockClient.lock();
+	sock->send(packet);//Send Latest Packet
+	blockClient.unlock();
+}
+
+void TCPCOM_Client::threadClientFunc()
+{
+	std::cout << "Actively Sending Packets..." << std::endl;
+	while (runClient) {
+		std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+		sendPacket();//Send Packet
+		std::this_thread::sleep_for(std::chrono::milliseconds(4));
+		std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+		std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[ms]" << std::endl;
+	}
+	std::cout << "No Longer Sending Packets" << std::endl;
+}
+
+void TCPCOM_Client::startClientThread()
+{
+	runClient = true;//Start thread
+	threadClient = std::thread(&TCPCOM_Client::threadClientFunc, this);//Create object specific thread for sending data to external computer
+}
+
+void TCPCOM_Client::stopClientThread()
+{
+	runClient = false;//Exit infinite while loop
+	threadClient.join();//Kill thread
+}
