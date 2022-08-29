@@ -20,7 +20,7 @@ private:
 	InsoleWrapper* I2;//Create new instance for Insole #105
 	sensorPacket packet;//Create variable for storing buffer of all sensors
 	/********************************************Client Multithreading Member Variables*****************************************/
-	std::mutex	blockClient;//Create lock for pointer when copying data from API
+	std::mutex blockClient;//Create lock for pointer when copying data from API
 	std::thread threadClient;//Create pointer for thread
 public:
 	std::atomic<bool> runClient{ false };//Default dont run thread
