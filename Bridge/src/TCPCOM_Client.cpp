@@ -19,10 +19,10 @@ void TCPCOM_Client::Connect()
 
 void TCPCOM_Client::getSensor()
 {
-	I1 = new InsoleWrapper(104);
-	I2 = new InsoleWrapper(105);
+	I1 = new InsoleWrapper(104);//Create new instance of Insole 104
+	I2 = new InsoleWrapper(105);//Create new instance of Insole 105
 	packet = { boost::asio::buffer(I1->p,128 * 4),
-			   boost::asio::buffer(I1->p,128 * 4) };
+			   boost::asio::buffer(I2->p,128 * 4) };//Create packet from all sensor buffers
 }
 
 void TCPCOM_Client::runSensor()
@@ -50,7 +50,7 @@ void TCPCOM_Client::threadClientFunc()
 	while (runClient) {
 		std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 		sendPacket();//Send Packet
-		std::this_thread::sleep_for(std::chrono::milliseconds(4));
+		std::this_thread::sleep_for(std::chrono::milliseconds(2));
 		std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 		std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[ms]" << std::endl;
 	}
