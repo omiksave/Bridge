@@ -89,8 +89,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\osave\Downloads\boost_1_79_0\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>"winmm.lib";%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib;C:\Users\osave\Downloads\boost_1_79_0\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>"winmm.lib";"ThreeSpace_API.lib";%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -108,8 +108,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\osave\Downloads\boost_1_79_0\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>"winmm.lib";%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib;C:\Users\osave\Downloads\boost_1_79_0\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>"winmm.lib";"ThreeSpace_API.lib";%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -122,7 +122,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>"winmm.lib";%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>"winmm.lib","ThreeSpace_API.lib";%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\osave\source\repos\omiksave\SLRT_Bridge\Bridge\Bridge\lib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -139,7 +140,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>"winmm.lib";%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>"winmm.lib","ThreeSpace_API.lib";%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\osave\source\repos\omiksave\SLRT_Bridge\Bridge\Bridge\lib;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -151,7 +153,6 @@
     <ClInclude Include="src\InsoleWrapper.h" />
     <ClInclude Include="src\Tactilus.h" />
     <ClInclude Include="src\TCPCOM_Client.h" />
-    <ClInclude Include="src\threespace_api_export.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\run\Win32\Debug\core.dll" />
@@ -159,7 +160,6 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\core.lib" />
-    <Library Include="lib\TSS_API_32.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

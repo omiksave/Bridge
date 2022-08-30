@@ -38,9 +38,6 @@
     <ClInclude Include="src\TCPCOM_Client.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\threespace_api_export.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\run\Win32\Debug\core.dll">
@@ -54,6 +51,5 @@
     <Library Include="lib\core.lib">
       <Filter>Libraries</Filter>
     </Library>
-    <Library Include="lib\TSS_API_32.lib" />
   </ItemGroup>
 </Project>
