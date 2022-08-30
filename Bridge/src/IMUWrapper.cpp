@@ -16,4 +16,41 @@ void IMUWrapper::initSensors()
 
 void IMUWrapper::updateIMU()
 {
+	blockIMU.lock();//Lock IMU
+	*error = tss_getTaredOrientationAsEulerAngles(*device, _euler, timestamp);//Get new value of IMU
+	memcpy(euler, _euler, 3 * 4);//Make copy of Euler
+	blockIMU.unlock();//Unlock IMU
+}
+
+void IMUWrapper::threadIMUFunc()
+{
+	std::cout << "IMU " << offset << " is running" << std::endl;
+	while (runIMU) {
+		std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+		updateIMU();//Run Insole Update in infinite while loop
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+		std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+		std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[ms]" << std::endl;
+	}
+	std::cout << "IMU " << offset << " has stopped" << std::endl;
+}
+
+void IMUWrapper::startIMUThread()
+{
+	runIMU = true;//Start thread
+	threadIMU = std::thread(&IMUWrapper::threadIMUFunc, this);//Create object specific thread for constant update of insole
+}
+
+void IMUWrapper::stopIMUThread()
+{
+	runIMU = false;//Exit infinite while loop
+	threadIMU.join();//Kill thread
+}
+
+IMUWrapper::~IMUWrapper(void)
+{
+	delete device;//Delete API Instance
+	delete comport;//Delete COM PORT object
+	delete error;//Delete error instance
+	std::cout << "Closing IMU " << offset << std::endl;
 }
