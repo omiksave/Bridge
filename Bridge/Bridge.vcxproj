@@ -145,14 +145,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\IMUWrapper.cpp" />
     <ClCompile Include="src\InsoleWrapper.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\TCPCOM_Client.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\IMUWrapper.h" />
     <ClInclude Include="src\InsoleWrapper.h" />
     <ClInclude Include="src\Tactilus.h" />
     <ClInclude Include="src\TCPCOM_Client.h" />
+    <ClInclude Include="src\yei_threespace_api.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\run\Win32\Debug\core.dll" />
@@ -160,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\core.lib" />
+    <Library Include="lib\ThreeSpace_API.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,67 +5,27 @@
 #include<stdio.h>
 
 int main() {
-	TSS_Device_Id  device;
-	TSS_Error tss_error;
-	TSS_ComPort comport;
+	TSS_Device_Id* device = new TSS_Device_Id;
+	TSS_ComPort* comport = new TSS_ComPort;
 
-	if (tss_getComPorts(&comport, 1, 0, TSS_FIND_ALL_KNOWN ^ TSS_FIND_DNG)) {
-		device = tss_createTSDeviceStr(comport.com_port, TSS_TIMESTAMP_SENSOR);
-		if (device == TSS_NO_DEVICE_ID) {
-			printf("Failed to create a sensor on %s\n", comport.com_port);
-			return 1;
-		}
-	}
-	else {
-		printf("No sensors found\n");
-		return 1;
-	}
-	printf("==================================================\n");
-	printf("Getting the filtered tared quaternion orientation.(xyzw)\n");
-	float eul[3];
-	unsigned int timestamp;
-	while (true) {
-		tss_error = tss_getTaredOrientationAsEulerAngles(device, eul, &timestamp);//tss_getTaredOrientationAsQuaternion(device, quat, &timestamp);
-		if (!tss_error) {
-			printf("Euler: %f, %f, %f Timestamp=%u\n", eul[0], eul[1], eul[2], timestamp);
-		}
-		else {
-			printf("TSS_Error: %s\n", TSS_Error_String[tss_error]);
-		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(10));
-	}
-	/*printf("==================================================\n");
-	printf("Getting the Corrected Component Sensor Data.\n");
-	float gyro[3];
-	float accel[3];
-	float compass[3];
-	tss_error = tss_getAllCorrectedComponentSensorData(device, gyro, accel, compass, NULL);
-	if (!tss_error) {
-		printf("Gyro:  %f, %f, %f\n", gyro[0], gyro[1], gyro[2]);
-		printf("Accel: %f, %f, %f\n", accel[0], accel[1], accel[2]);
-		printf("Comp:  %f, %f, %f\n", compass[0], compass[1], compass[2]);
-	}
-	else {
-		printf("TSS_Error: %s\n", TSS_Error_String[tss_error]);
-	}
-	printf("==================================================\n");
-	printf("Getting the LED color  of the device.\n");
-	float color[3];
-	tss_error = tss_getLEDColor(device, color, NULL);
-	if (!tss_error) {
-		printf("Color: %f, %f, %f\n", color[0], color[1], color[2]);
-	}
-	else {
-		printf("TSS_Error: %s\n", TSS_Error_String[tss_error]);
-	}
-	printf("==================================================\n");*/
-	tss_closeTSDevice(device);
+	int numero = tss_getComPorts(comport, 1, 0, TSS_FIND_ALL_KNOWN);
 
-	printf("Finished press Enter to continue");
-	getchar();
-	return 0;
+	*device = tss_createTSDeviceStr(comport->com_port,TSS_TIMESTAMP_SENSOR);
+	TSS_Error* error = new TSS_Error;
+	float* euler = new float[3]{};
+	unsigned int* timestamp = new unsigned int[1]();
+	*error = tss_getTaredOrientationAsEulerAngles(*device, euler, timestamp);
+	*error = tss_getTaredOrientationAsEulerAngles(*device, euler, timestamp);
+	float* color = new float[3]{ 0,0,1 };
+	*error = tss_setLEDColor(*device,color , timestamp);
+	TSS_Device_Id* device1 = new TSS_Device_Id;
+	TSS_ComPort* comport1 = new TSS_ComPort;
+	*color = 1;
+	numero = tss_getComPorts(comport1, 1, 1, TSS_FIND_ALL_KNOWN^TSS_FIND_DNG);
 
+	*device1 = tss_createTSDeviceStr(comport1->com_port, TSS_TIMESTAMP_SENSOR);
 
+	*error = tss_setLEDColor(*device1, color, timestamp);
 	//timeBeginPeriod(1);//Change system granularity to 1 ms, default 10ms
 	//TCPCOM_Client MyClient("127.0.0.1", 5001);//Initialize communication with Speedgoat
 	//MyClient.startClientThread();//Start Client thread
