@@ -5,7 +5,7 @@
 #include<stdio.h>
 
 int main() {
-	TSS_Device_Id* device = new TSS_Device_Id;
+	/*TSS_Device_Id* device = new TSS_Device_Id;
 	TSS_ComPort* comport = new TSS_ComPort;
 
 	int numero = tss_getComPorts(comport, 1, 0, TSS_FIND_ALL_KNOWN);
@@ -25,7 +25,7 @@ int main() {
 
 	*device1 = tss_createTSDeviceStr(comport1->com_port, TSS_TIMESTAMP_SENSOR);
 
-	*error = tss_setLEDColor(*device1, color, timestamp);
+	*error = tss_setLEDColor(*device1, color, timestamp);*/
 	//timeBeginPeriod(1);//Change system granularity to 1 ms, default 10ms
 	//TCPCOM_Client MyClient("127.0.0.1", 5001);//Initialize communication with Speedgoat
 	//MyClient.startClientThread();//Start Client thread
