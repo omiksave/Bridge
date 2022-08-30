@@ -20,7 +20,7 @@ private:
 	std::mutex blockIMU;//Create lock for pointer when copying data from API
 	std::thread threadIMU;//Create pointer for thread
 public:
-	float* euler = new float[3]{ 0,0,0 };//Public Euler copy for communication
+	unsigned char* euler = new unsigned char[12]();//Public Euler copy for communication
 	std::atomic<bool> runIMU{ false };//Default dont run thread
 	IMUWrapper(int offsetx);//Default constructor
 	void initSensors();//Initialize IMU

@@ -1,11 +1,11 @@
 #pragma once
-#include"InsoleWrapper.h"
-#include"IMUWrapper.h"
 #include<boost/asio.hpp>
 #include<boost/array.hpp>
+#include"InsoleWrapper.h"
+#include"IMUWrapper.h"
 #include<string>
 
-typedef boost::array<boost::asio::const_buffer, 3> sensorPacket;//Define Buffer Array
+typedef boost::array<boost::asio::const_buffer, 4> sensorPacket;//Define Buffer Array
 
 class TCPCOM_Client
 {

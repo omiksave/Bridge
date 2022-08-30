@@ -1,3 +1,4 @@
+#pragma once
 #include "TCPCOM_Client.h"
 
 TCPCOM_Client::TCPCOM_Client(std::string add,int portx)
@@ -25,7 +26,8 @@ void TCPCOM_Client::getSensor()
 	IMU2 = new IMUWrapper(1);//Create new instance of IMU 1
 	packet = { boost::asio::buffer(I1->p,128 * 4),
 			   boost::asio::buffer(I2->p,128 * 4),
-	boost::asio::buffer(IMU1->euler,3 * 4)};//Create packet from all sensor buffers
+			   boost::asio::buffer(IMU1->euler,3 * 4),
+			   boost::asio::buffer(IMU2->euler,3 * 4) };//Create packet from all sensor buffers
 }
 
 void TCPCOM_Client::runSensor()
@@ -33,7 +35,7 @@ void TCPCOM_Client::runSensor()
 	I1->StartThread();//Start Insole 1 thread
 	I2->StartThread();//Start Insole 2 thread
 	IMU1->startIMUThread();//Start IMU 0 thread
-	//IMU2->startIMUThread();//Start IMU 1 thread
+	IMU2->startIMUThread();//Start IMU 1 thread
 }
 
 void TCPCOM_Client::stopSensor()
@@ -41,7 +43,7 @@ void TCPCOM_Client::stopSensor()
 	I1->StopThread();//Stop Insole 1 thread
 	I2->StopThread();//Stop Insole 2 thread
 	IMU1->stopIMUThread();//Stop IMU 0 thread
-	//IMU2->stopIMUThread();//Stop IMU 1 thread
+	IMU2->stopIMUThread();//Stop IMU 1 thread
 }
 
 void TCPCOM_Client::sendPacket()
@@ -55,11 +57,11 @@ void TCPCOM_Client::threadClientFunc()
 {
 	std::cout << "Actively Sending Packets..." << std::endl;
 	while (runClient) {
-		//std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+		std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 		sendPacket();//Send Packet
 		std::this_thread::sleep_for(std::chrono::milliseconds(3));//Pause Client for external computer to catch up
-		//std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-		//std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[ms]" << std::endl;
+		std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+		std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[ms]" << std::endl;
 	}
 	std::cout << "No Longer Sending Packets" << std::endl;
 }
@@ -85,7 +87,7 @@ TCPCOM_Client::~TCPCOM_Client(void)
 	delete I1;//Delete Insole 104 instance
 	delete I2;//Delete Insole 105 instance
 	delete IMU1;//Delete IMU 0 instance
-	//delete IMU2;//Delete IMU 1 instance
+	delete IMU2;//Delete IMU 1 instance
 	delete sock.release();//Delete Socket
 	delete io_service.release();//Delete IO Service
 	std::cout << "Closing Client!" << std::endl;

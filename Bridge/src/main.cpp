@@ -1,38 +1,16 @@
-#include"InsoleWrapper.h"//Insole Wrapper Function
 #include"TCPCOM_Client.h"//TCP Client Function
 #include<timeapi.h>//Access system granularity
-#include"yei_threespace_api.h"
-#include<stdio.h>
+
 
 int main() {
-	/*TSS_Device_Id* device = new TSS_Device_Id;
-	TSS_ComPort* comport = new TSS_ComPort;
 
-	int numero = tss_getComPorts(comport, 1, 0, TSS_FIND_ALL_KNOWN);
-
-	*device = tss_createTSDeviceStr(comport->com_port,TSS_TIMESTAMP_SENSOR);
-	TSS_Error* error = new TSS_Error;
-	float* euler = new float[3]{};
-	unsigned int* timestamp = new unsigned int[1]();
-	*error = tss_getTaredOrientationAsEulerAngles(*device, euler, timestamp);
-	*error = tss_getTaredOrientationAsEulerAngles(*device, euler, timestamp);
-	float* color = new float[3]{ 0,0,1 };
-	*error = tss_setLEDColor(*device,color , timestamp);
-	TSS_Device_Id* device1 = new TSS_Device_Id;
-	TSS_ComPort* comport1 = new TSS_ComPort;
-	*color = 1;
-	numero = tss_getComPorts(comport1, 1, 1, TSS_FIND_ALL_KNOWN^TSS_FIND_DNG);
-
-	*device1 = tss_createTSDeviceStr(comport1->com_port, TSS_TIMESTAMP_SENSOR);
-
-	*error = tss_setLEDColor(*device1, color, timestamp);*/
-	//timeBeginPeriod(1);//Change system granularity to 1 ms, default 10ms
-	//TCPCOM_Client MyClient("127.0.0.1", 5001);//Initialize communication with Speedgoat
-	//MyClient.startClientThread();//Start Client thread
-	//std::cin.get();//Press Enter to safely interrupt
-	//MyClient.stopClientThread();//Stop Client Thread
-	//timeEndPeriod(1);//Return system granularity to default
-	//return 0;
+	timeBeginPeriod(1);//Change system granularity to 1 ms, default 10ms
+	TCPCOM_Client MyClient("192.168.7.1", 5001);//Initialize communication with Speedgoat
+	MyClient.startClientThread();//Start Client thread
+	std::cin.get();//Press Enter to safely interrupt
+	MyClient.stopClientThread();//Stop Client Thread
+	timeEndPeriod(1);//Return system granularity to default
+	return 0;
 }
 
 /***********************************Garbage******************************************/
