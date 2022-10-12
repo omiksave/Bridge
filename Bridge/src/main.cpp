@@ -4,7 +4,7 @@
 
 int main() {
 	timeBeginPeriod(1);//Change system granularity to 1 ms, default 10ms
-	TCPCOM_Client MyClient("127.0.0.1", 5001);//Initialize communication with Speedgoat
+	TCPCOM_Client MyClient("192.168.7.1", 5001);//Initialize communication with Speedgoat
 	std::cout << "Finished Setup" << std::endl;
 	std::cin.get();
 	MyClient.startClientThread();//Start Client thread

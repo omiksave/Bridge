@@ -63,7 +63,7 @@ void TCPCOM_Client::threadClientFunc()
 		//std::this_thread::sleep_for(std::chrono::milliseconds(3));//Pause Client for external computer to catch up
 		std::chrono::steady_clock::time_point end = std::chrono::high_resolution_clock::now();
 		//std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[ms]" << std::endl;
-		printf("Packet sent in %I64d [ms]\n", std::chrono::duration_cast<std::chrono::milliseconds>(begin - end).count());
+		printf("Packet sent in %I64d [ns]\n", std::chrono::duration_cast<std::chrono::nanoseconds>(begin - end).count());
 	}
 	std::cout << "No Longer Sending Packets" << std::endl;
 }

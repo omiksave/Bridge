@@ -12,7 +12,7 @@ private:
 	std::chrono::high_resolution_clock::time_point _start = std::chrono::high_resolution_clock::now();// Set initial time
 	std::chrono::high_resolution_clock::time_point _end;// Initiate end time variable
 	long long _elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(_end - _start).count();// Initiate duration variable
-	long long _delay = 500000;// Initiate delay variable
+	long long _delay = 5000000;// Initiate delay variable
 public:
 	ThreadTimer() {};//Default Constructor
 	ThreadTimer(long long delay) { _delay = delay; };// Intialize object
