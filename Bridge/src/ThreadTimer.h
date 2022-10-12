@@ -14,6 +14,7 @@ private:
 	long long _elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(_end - _start).count();// Initiate duration variable
 	long long _delay = 500000;// Initiate delay variable
 public:
+	ThreadTimer() {};//Default Constructor
 	ThreadTimer(long long delay) { _delay = delay; };// Intialize object
 	~ThreadTimer();// Destruct object
 };

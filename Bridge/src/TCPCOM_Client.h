@@ -3,6 +3,7 @@
 #include<boost/array.hpp>
 #include"InsoleWrapper.h"
 #include"IMUWrapper.h"
+#include"ThreadTimer.h"
 #include<string>
 
 typedef boost::array<boost::asio::const_buffer, 4> sensorPacket;//Define Buffer Array

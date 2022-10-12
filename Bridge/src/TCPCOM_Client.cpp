@@ -57,11 +57,13 @@ void TCPCOM_Client::threadClientFunc()
 {
 	std::cout << "Actively Sending Packets..." << std::endl;
 	while (runClient) {
-		std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+		std::chrono::steady_clock::time_point begin = std::chrono::high_resolution_clock::now();
+		ThreadTimer timex;//Create thread time management
 		sendPacket();//Send Packet
-		std::this_thread::sleep_for(std::chrono::milliseconds(3));//Pause Client for external computer to catch up
-		std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-		std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[ms]" << std::endl;
+		//std::this_thread::sleep_for(std::chrono::milliseconds(3));//Pause Client for external computer to catch up
+		std::chrono::steady_clock::time_point end = std::chrono::high_resolution_clock::now();
+		//std::cout << "Time difference = " << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << "[ms]" << std::endl;
+		printf("Packet sent in %I64d [ms]\n", std::chrono::duration_cast<std::chrono::milliseconds>(begin - end).count());
 	}
 	std::cout << "No Longer Sending Packets" << std::endl;
 }

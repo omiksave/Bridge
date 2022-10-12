@@ -5,6 +5,7 @@
 #include"yei_threespace_api.h"
 #include<mutex>
 #include<atomic>
+#include"ThreadTimer.h"
 
 class IMUWrapper
 {

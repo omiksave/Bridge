@@ -3,6 +3,7 @@
 #include<thread>
 #include<chrono>
 #include"Tactilus.h"
+#include"ThreadTimer.h"
 #include<mutex>
 #include<atomic>
 
