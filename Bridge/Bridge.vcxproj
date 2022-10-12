@@ -89,7 +89,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)lib;C:\Users\osave\Downloads\boost_1_79_0\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\osave\Downloads\ThreeSpace_API_C_2.0.6.1;$(ProjectDir)lib;C:\Users\osave\Downloads\boost_1_79_0\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>"winmm.lib";"ThreeSpace_API.lib";%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -108,7 +108,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)lib;C:\Users\osave\Downloads\boost_1_79_0\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\osave\Downloads\ThreeSpace_API_C_2.0.6.1;$(ProjectDir)lib;C:\Users\osave\Downloads\boost_1_79_0\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>"winmm.lib";"ThreeSpace_API.lib";%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -149,6 +149,7 @@
     <ClCompile Include="src\InsoleWrapper.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\TCPCOM_Client.cpp" />
+    <ClCompile Include="src\ThreadTimer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\IMUWrapper.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="src\Tactilus.h" />
     <ClInclude Include="src\TCPCOM_Client.h" />
     <ClInclude Include="src\yei_threespace_api.h" />
+    <ClInclude Include="src\ThreadTimer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\run\Win32\Debug\core.dll" />

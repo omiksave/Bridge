@@ -49,7 +49,7 @@ void TCPCOM_Client::stopSensor()
 void TCPCOM_Client::sendPacket()
 {
 	blockClient.lock();//Lock packet until safe
-	boost::asio::write(*sock, packet, *error);//Write data to packet
+	boost::asio::write(*sock, packet, * error);//Write data to packet
 	blockClient.unlock();//Unlock packet
 }
 
