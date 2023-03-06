@@ -17,9 +17,9 @@ private:
 	std::mutex blockWLS;//Create lock for pointer when copying data from API
 	std::thread threadWLS;//Create pointer for thread
 public:
-	unsigned char copy_loc[12]{};
+	unsigned char* euler = new unsigned char[12]();
 	std::atomic<bool> runWLS{ false };//Default dont run thread
-	WLSWrapper(unsigned char* dbuf_loc, TSS_Device_Id sensor, int logic_id);
+	WLSWrapper(TSS_Device_Id sensor);
 	void updateWLS();
 	void threadWLSFunc();
 	void startThreadWLS();

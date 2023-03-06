@@ -1,23 +1,23 @@
 #include "WLSWrapper.h"
 
-WLSWrapper::WLSWrapper(unsigned char* dbuf_loc,TSS_Device_Id sensor,int logic_id)
+WLSWrapper::WLSWrapper(TSS_Device_Id sensor)
 {
 	_sensor_id = sensor;
-	dbuf_loc[logic_id] = &copy_loc;
-	tss_setStreamingTiming(_sensor_id, 0, TSS_INFINITE_DURATION, 0, NULL);
+	//*dbuf_loc = *copy_loc;
+	tss_setStreamingTiming(_sensor_id, 2, TSS_INFINITE_DURATION, 0, NULL);
 	tss_setStreamingSlots(_sensor_id, _slots, NULL);
 	tss_startStreaming(_sensor_id, NULL);
-	startThreadWLS();
+	//startThreadWLS();
 
 
 }
 
 void WLSWrapper::updateWLS()
 {
-	blockWLS.lock();
+	//blockWLS.lock();
 	_error = tss_getLastStreamData(_sensor_id, (char*)&_euler, sizeof(_euler), _timestamp);
-	memcpy(copy_loc, _euler, 12);//Make copy of Euler
-	blockWLS.unlock();
+	memcpy(euler, _euler, 12);
+	//blockWLS.unlock();
 }
 
 void WLSWrapper::threadWLSFunc()

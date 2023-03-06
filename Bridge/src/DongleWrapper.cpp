@@ -33,17 +33,10 @@ void DongleWrapper::CreateWLSensors()
 	while (*sensor != TSS_NO_DEVICE_ID) {
 		tss_getSensorFromDongle(*_dongle, logic_id, sensor);
 		sensor_list.push_back(*sensor);
-		new WLSWrapper(euler_buf, sensor_list[logic_id], logic_id);
-		//include wireless object
+		_temp = new WLSWrapper(sensor_list[logic_id]);
+		sensor_id.push_back(_temp);
 		logic_id++;
 	}
-	/*if (logic_id > 0) {
-		logic_id -= 1;
-		euler_buf = new unsigned char[(logic_id+1) * 12];
-	}
-	else {
-		printf("Dongle failed to create any sensors!");
-	}*/
 }
 
 DongleWrapper::~DongleWrapper()

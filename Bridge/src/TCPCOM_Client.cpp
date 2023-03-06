@@ -20,30 +20,44 @@ void TCPCOM_Client::Connect()
 
 void TCPCOM_Client::getSensor()
 {
-	I1 = new InsoleWrapper(104);//Create new instance of Insole 104
-	I2 = new InsoleWrapper(105);//Create new instance of Insole 105
-	IMU1 = new IMUWrapper(0);//Create new instance of IMU 0
-	IMU2 = new IMUWrapper(1);//Create new instance of IMU 1
-	packet = { boost::asio::buffer(I1->p,128 * 4),
-			   boost::asio::buffer(I2->p,128 * 4),
-			   boost::asio::buffer(IMU1->euler,3 * 4),
-			   boost::asio::buffer(IMU2->euler,3 * 4) };//Create packet from all sensor buffers
+	//I1 = new InsoleWrapper(104);//Create new instance of Insole 104
+	//I2 = new InsoleWrapper(105);//Create new instance of Insole 105
+	//IMU1 = new IMUWrapper(0);//Create new instance of IMU 0
+	//IMU2 = new IMUWrapper(1);//Create new instance of IMU 1
+	dongle = new DongleWrapper(0);
+	//dongle1 = new DongleWrapper(1);
+	dongle->CreateWLSensors();
+	//dongle1->CreateWLSensors();
+	//packet = { boost::asio::buffer(I1->p,128 * 4),
+	//		   boost::asio::buffer(I2->p,128 * 4),
+	//		   boost::asio::buffer(IMU1->euler,3 * 4),
+	//		   boost::asio::buffer(IMU2->euler,3 * 4) };//Create packet from all sensor buffers
+	packet = { boost::asio::buffer(dongle->sensor_id[0]->euler,3 * 4),
+			   boost::asio::buffer(dongle->sensor_id[1]->euler,3 * 4)};
 }
 
 void TCPCOM_Client::runSensor()
 {
-	I1->StartThread();//Start Insole 1 thread
-	I2->StartThread();//Start Insole 2 thread
-	IMU1->startIMUThread();//Start IMU 0 thread
-	IMU2->startIMUThread();//Start IMU 1 thread
+	dongle->sensor_id[0]->startThreadWLS();
+	dongle->sensor_id[1]->startThreadWLS();
+	//dongle1->sensor_id[0]->startThreadWLS();
+	//dongle1->sensor_id[1]->startThreadWLS();
+	//I1->StartThread();//Start Insole 1 thread
+	//I2->StartThread();//Start Insole 2 thread
+	//IMU1->startIMUThread();//Start IMU 0 thread
+	//IMU2->startIMUThread();//Start IMU 1 thread
 }
 
 void TCPCOM_Client::stopSensor()
 {
-	I1->StopThread();//Stop Insole 1 thread
-	I2->StopThread();//Stop Insole 2 thread
-	IMU1->stopIMUThread();//Stop IMU 0 thread
-	IMU2->stopIMUThread();//Stop IMU 1 thread
+	dongle->sensor_id[0]->stopThreadWLS();
+	dongle->sensor_id[1]->stopThreadWLS();
+	//dongle1->sensor_id[0]->stopThreadWLS();
+	//dongle1->sensor_id[1]->stopThreadWLS();
+	//I1->StopThread();//Stop Insole 1 thread
+	//I2->StopThread();//Stop Insole 2 thread
+	//IMU1->stopIMUThread();//Stop IMU 0 thread
+	//IMU2->stopIMUThread();//Stop IMU 1 thread
 }
 
 void TCPCOM_Client::sendPacket()
@@ -58,7 +72,7 @@ void TCPCOM_Client::threadClientFunc()
 	std::cout << "Actively Sending Packets..." << std::endl;
 	while (runClient) {
 		std::chrono::steady_clock::time_point begin = std::chrono::high_resolution_clock::now();
-		ThreadTimer timex;//Create thread time management
+		//ThreadTimer timex;//Create thread time management
 		sendPacket();//Send Packet
 		//std::this_thread::sleep_for(std::chrono::milliseconds(3));//Pause Client for external computer to catch up
 		std::chrono::steady_clock::time_point end = std::chrono::high_resolution_clock::now();
@@ -86,10 +100,12 @@ void TCPCOM_Client::stopClientThread()
 
 TCPCOM_Client::~TCPCOM_Client(void)
 {
-	delete I1;//Delete Insole 104 instance
-	delete I2;//Delete Insole 105 instance
-	delete IMU1;//Delete IMU 0 instance
-	delete IMU2;//Delete IMU 1 instance
+	//delete I1;//Delete Insole 104 instance
+	//delete I2;//Delete Insole 105 instance
+	//delete IMU1;//Delete IMU 0 instance
+	//delete IMU2;//Delete IMU 1 instance
+	delete dongle;
+	//delete dongle1;
 	delete sock.release();//Delete Socket
 	delete io_service.release();//Delete IO Service
 	std::cout << "Closing Client!" << std::endl;

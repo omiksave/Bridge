@@ -73,10 +73,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(ProjectDir)bin\run\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(Projectname)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(ProjectDir)bin\run\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)bin\intermediates\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(Projectname)</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -145,19 +147,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\DongleWrapper.cpp" />
     <ClCompile Include="src\IMUWrapper.cpp" />
     <ClCompile Include="src\InsoleWrapper.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\TCPCOM_Client.cpp" />
     <ClCompile Include="src\ThreadTimer.cpp" />
+    <ClCompile Include="src\WLSWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\DongleWrapper.h" />
     <ClInclude Include="src\IMUWrapper.h" />
     <ClInclude Include="src\InsoleWrapper.h" />
     <ClInclude Include="src\Tactilus.h" />
     <ClInclude Include="src\TCPCOM_Client.h" />
     <ClInclude Include="src\yei_threespace_api.h" />
     <ClInclude Include="src\ThreadTimer.h" />
+    <ClInclude Include="src\WLSWrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\run\Win32\Debug\core.dll" />
