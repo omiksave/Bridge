@@ -4,7 +4,7 @@ WLSWrapper::WLSWrapper(TSS_Device_Id sensor)
 {
 	_sensor_id = sensor;
 	//*dbuf_loc = *copy_loc;
-	tss_setStreamingTiming(_sensor_id, 2, TSS_INFINITE_DURATION, 0, NULL);
+	tss_setStreamingTiming(_sensor_id, 0, TSS_INFINITE_DURATION, 0, NULL);
 	tss_setStreamingSlots(_sensor_id, _slots, NULL);
 	tss_startStreaming(_sensor_id, NULL);
 	//startThreadWLS();

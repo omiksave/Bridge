@@ -5,9 +5,11 @@
 #include"IMUWrapper.h"
 #include"ThreadTimer.h"
 #include"DongleWrapper.h"
+#include<condition_variable>
 #include<string>
+#include<Windows.h>
 
-typedef boost::array<boost::asio::const_buffer, 2> sensorPacket;//Define Buffer Array
+typedef boost::array<boost::asio::const_buffer, 4> sensorPacket;//Define Buffer Array
 
 class TCPCOM_Client
 {
@@ -19,8 +21,8 @@ private:
 	std::string address;//Store COM Address
 	int port;//Store COM Port
 	/*******************************************Sensor Specific Member Variables************************************************/
-	//InsoleWrapper* I1;//Create new instance for Insole #104
-	//InsoleWrapper* I2;//Create new instance for Insole #105
+	InsoleWrapper* I1;//Create new instance for Insole #104
+	InsoleWrapper* I2;//Create new instance for Insole #105
 	DongleWrapper* dongle;
 	//DongleWrapper* dongle1;
 	//IMUWrapper* IMU1;//Create new instance for IMU 0
@@ -28,7 +30,9 @@ private:
 	sensorPacket packet;//Create variable for storing buffer of all sensors
 	/********************************************Client Multithreading Member Variables*****************************************/
 	std::mutex blockClient;//Create lock for pointer when copying data from API
+	std::condition_variable cv;
 	std::thread threadClient;//Create pointer for thread
+	//std::thread t1, t2, t3, t4;
 public:
 	std::atomic<bool> runClient{ false };//Default dont run thread
 	/***************************************************************************************************************************/
@@ -39,6 +43,9 @@ public:
 	void stopSensor();//Stop all threads on all sensors
 	void sendPacket();//Send Packet Function
 	void threadClientFunc();//Loop send until stopped
+	void threadClientIMU(DongleWrapper* dongle);
+	void threadClientInsole(InsoleWrapper* insole);
+	void sensorRefresh();
 	void startClientThread();//Start seperate thread to control buffer send
 	void stopClientThread();//Stop buffer send thread
 	~TCPCOM_Client(void);//Class destructor

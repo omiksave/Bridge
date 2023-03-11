@@ -17,10 +17,10 @@ void InsoleWrapper::SetupInsole()
 
 void InsoleWrapper::UpdateInsole()
 {
-	shareblock.lock();//Add lock to avoid memory corruption
+	//shareblock.lock();//Add lock to avoid memory corruption
 	tx->scan();//Refresh new frame from Insole API
 	memcpy(p, pprivate, 128 * 4);//Copy matrix for Task Manager access
-	shareblock.unlock();//Release lock
+	//shareblock.unlock();//Release lock
 }
 
 void InsoleWrapper::ThreadFunc()

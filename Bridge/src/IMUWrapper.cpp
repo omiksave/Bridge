@@ -17,10 +17,10 @@ void IMUWrapper::initSensors()
 
 void IMUWrapper::updateIMU()
 {
-	blockIMU.lock();//Lock IMU
+	//blockIMU.lock();//Lock IMU
 	*error = tss_getTaredOrientationAsEulerAngles(*device, _euler, timestamp);//Get new value of IMU
 	memcpy(euler,_euler,12);//Make copy of Euler
-	blockIMU.unlock();//Unlock IMU
+	//blockIMU.unlock();//Unlock IMU
 }
 
 void IMUWrapper::threadIMUFunc()
